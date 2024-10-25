@@ -1,5 +1,21 @@
-### Project: Data Pipeline with DVC and MLflow for Machine Learning
-This project demonstrates how to build an end-to-end machine learning pipeline using DVC (Data Version Control) for data and model versioning, and MLflow for experiment tracking. The pipeline focuses on training a Random Forest Classifier on the Pima Indians Diabetes Dataset, with clear stages for data preprocessing, model training, and evaluation.
+
+# The Pima Indians Diabetes Dataset
+
+ Data Pipeline with DVC and MLflow for Machine Learning
+
+# Goal
+
+To develop a predictive model that accurately diagnoses diabetes in patients based on various medical predictor variables, achieving at least 83% accuracy to facilitate early detection and improved health management.
+
+To demonstrates how to manage the lifecycle of a machine learning project, ensuring that data, code, models, and experiments are all tracked, versioned, and reproducible.
+
+# Technology Stack:
+Python: The core programming language for data processing, model training, and evaluation.
+DVC: For version control of data, models, and pipeline stages.
+MLflow: For logging and tracking experiments, metrics, and model artifacts.
+Scikit-learn: For building and training the Random Forest Classifier.
+
+## Documentation
 
 Key Features of the Project:
 Data Version Control (DVC):
@@ -27,41 +43,37 @@ Evaluation:
 The evaluate.py script loads the trained model and evaluates its performance (accuracy) on the dataset.
 The evaluation metrics are logged to MLflow for tracking.
 
-Goals:
 
-Reproducibility: By using DVC, the pipeline ensures that the same data, parameters, and code can reproduce the same results, making the workflow reliable and consistent.
-Experimentation: MLflow allows users to easily track different experiments (with varying hyperparameters) and compare the performance of models.
-Collaboration: DVC and MLflow enable smooth collaboration in a team environment, where different users can work on the same project and track changes seamlessly.
+## Deployment
 
-Use Cases:
-Data Science Teams: Teams can use this project setup to track datasets, models, and experiments in a reproducible and organized manner.
-Machine Learning Research: Researchers can quickly iterate over different experiments, track performance metrics, and manage data versions effectively.
+To deploy this project run
 
-Technology Stack:
-Python: The core programming language for data processing, model training, and evaluation.
-DVC: For version control of data, models, and pipeline stages.
-MLflow: For logging and tracking experiments, metrics, and model artifacts.
-Scikit-learn: For building and training the Random Forest Classifier.
 
-This project demonstrates how to manage the lifecycle of a machine learning project, ensuring that data, code, models, and experiments are all tracked, versioned, and reproducible.
+#For Adding Stages
 
-### For Adding Stages
+dvc stage add -n preprocess
+-p preprocess.input,preprocess.output
+-d src/preprocess.py -d data/raw/data.csv
+-o data/processed/data.csv
+python src/preprocess.py
 
-dvc stage add -n preprocess \
-    -p preprocess.input,preprocess.output \
-    -d src/preprocess.py -d data/raw/data.csv \
-    -o data/processed/data.csv \
-    python src/preprocess.py
-	
-	
-dvc stage add -n train \
-    -p train.data,train.model,train.random_state,train.n_estimators,train.max_depth \
-    -d src/train.py -d data/raw/data.csv \
-    -o models/model.pkl \
-    python src/train.py
-	
-dvc stage add -n evaluate \
-    -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
-    python src/evaluate.py
+dvc stage add -n train
+-p train.data,train.model,train.random_state,train.n_estimators,train.max_depth
+-d src/train.py -d data/raw/data.csv
+-o models/model.pkl
+python src/train.py
+
+dvc stage add -n evaluate
+-d src/evaluate.py -d models/model.pkl -d data/raw/data.csv
+python src/evaluate.py
 
 #dagshub link:https://dagshub.com/contactkrishnaraj/machinelearningpipeline1
+
+```bash
+  dvc repro =runs the entire stages of pipelines
+```
+
+
+## 🚀 About Me
+I'm a Data science enthusiast
+
