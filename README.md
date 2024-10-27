@@ -1,7 +1,7 @@
 
 # The Pima Indians Diabetes Dataset
 
- Data Pipeline with DVC and MLflow for Machine Learning
+ Data Pipeline with DVC and MLflow for Machine Learning.
 
 # Goal
 
